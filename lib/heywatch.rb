@@ -91,14 +91,14 @@ class HeyWatch
   # => true
   def jpg(id, params={})
     if params.delete(:async) or params.delete("async")
-      @cli["/encoded_video/#{id}/thumbnails"].post(params)
+      @cli["/encoded_video/#{id}/thumbnails.json"].post(params)
       return true
     end
     
     unless params.empty?
       params = "?" + params.map{|k,v| "#{k}=#{v}"}.join("&")
     end
-    @cli["/encoded_video/#{id}/thumbnails.xml#{params}"].get
+    @cli["/encoded_video/#{id}/thumbnails.json#{params}"].get
   rescue RestClient::BadRequest=> e
     raise BadRequest, e.http_body
   end
