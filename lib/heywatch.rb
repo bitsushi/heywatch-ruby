@@ -98,7 +98,7 @@ class HeyWatch
     unless params.empty?
       params = "?" + params.map{|k,v| "#{k}=#{v}"}.join("&")
     end
-    @cli["/encoded_video/#{id}.jpg#{params}"].get
+    @cli["/encoded_video/#{id}/thumbnails.xml#{params}"].get
   rescue RestClient::BadRequest=> e
     raise BadRequest, e.http_body
   end
